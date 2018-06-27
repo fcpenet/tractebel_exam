@@ -2,7 +2,6 @@ import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
 from src.models.base import Base
-from src.models.country import Country
 
 
 class State(Base):
