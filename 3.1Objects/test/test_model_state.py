@@ -15,8 +15,17 @@ class TestStateModel(unittest.TestCase):
 
         Base.metadata.create_all(self.engine)
 
+        self.country = Country(id='CO', name='country', currency='$')
     def teardown(self):
         self.session.remove()
 
-    def test_init(self):
-        self.assertFalse(True)
+    def test_state_name_must_be_unique_each_country(self):
+        err = None
+        try:
+            state1 = State(id='S1', name='state1', country=self.country)
+            state2 = State(id='S2', name='state1', country=self.country)
+        except Exception as e:
+            err = e
+
+        self.assertIsInstance(err, IntegrityError)
+

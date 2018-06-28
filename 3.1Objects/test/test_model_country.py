@@ -42,4 +42,3 @@ class TestCountryModel(unittest.TestCase):
 
         self.assertIsInstance(err, IntegrityError)
 
-
