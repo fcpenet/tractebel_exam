@@ -3,7 +3,13 @@ module.exports = (sequelize, DataTypes) => {
   var Client = sequelize.define('Client', {
     name: {
 		type: DataTypes.STRING,
-		allowNull: false
+		allowNull: false,
+		validate: {
+			not: {
+				args: /^\s*$/i,
+				msg: 'Name must not be blank!'
+			}
+		}
 	},
     telephone: {
 		type: DataTypes.STRING,
