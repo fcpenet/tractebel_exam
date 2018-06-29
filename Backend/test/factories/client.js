@@ -13,7 +13,6 @@ const data = async(props = {}) => {
 		name: faker.name.findName(),
 		telephone: faker.phone.phoneNumber(),
 	};
-	console.log(defaultProps);
 	return Object.assign({}, defaultProps, props);
 };
 
