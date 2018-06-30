@@ -4,7 +4,7 @@ export default function student(state=initialState, action){
 	switch(action.type){
 		case 'GET_ALL_SUCCESS':
 			_state.clients = action.clients;
-			console.log(_state);
+			_state.isDone = false;
 			return _state;
 
 		case 'CREATE_SUCCESS':
@@ -14,6 +14,16 @@ export default function student(state=initialState, action){
 		case 'CREATE_FAILED':
 			_state.message = action.message;
 			return _state;
+
+
+		case 'UPDATE_SUCCESS':
+			_state.isDone = true;
+			return _state;
+
+		case 'UPDATE_FAILED':
+			_state.isDone = false;
+			return _state;
+
 
 		default:
 			return _state;

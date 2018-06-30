@@ -45,3 +45,33 @@ export const create = (name, telephone) => {
 			});
 		}
 	}
+
+export const update = (id, name, telephone) => {
+	return dispatch => {
+		let headers = {
+			'Content-Type': 'application/json',
+			'Accept' : 'application/json'};
+		let body = JSON.stringify({
+			name: name,
+			telephone: telephone
+			});
+		return fetch('/clients/'+id, {headers, method: 'PUT', body})
+			.then(res => res.json())
+			.then(client => {
+				console.log(client);
+				if(client.error){
+					return dispatch({
+						type: 'UPDATE_FAILED',
+						message: client.message
+					})
+				}
+				else{
+					return dispatch({
+						type: 'UPDATE_SUCCESS',
+						message: client.message
+					})
+
+				}
+			});
+		}
+	}

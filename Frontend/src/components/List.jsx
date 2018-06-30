@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { client } from '../actions';
 
@@ -66,7 +66,14 @@ class List extends Component {
 					</tr>
 					{clients.map((client) => 
 						<tr key = {client.id}>
-							<td>{client.name} </td>
+							<td>
+								<Link to={{pathname: '/client/update', 
+									query: { name: client.name, 
+											telephone: client.telephone,
+											id: client.id }}}>
+									{client.name}
+								</Link>
+							</td>
 							<td>{client.telephone}</td>
 						</tr>
 					)}
