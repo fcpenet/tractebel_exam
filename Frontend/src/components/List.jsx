@@ -8,13 +8,18 @@ class List extends Component {
   		name: '',
 		telephone: '',
 		clients: [],
-		message: ''
+		message: '',
+		key: ''
 	}
 	
 	onNameChange = (e) => {
 		this.setState({name: e.target.value});
 	}
 	
+	onKeyChange = (e) => {
+		this.setState({key: e.target.value});
+	}
+
 	onTelephoneChange = (e) => {
 		this.setState({telephone: e.target.value});
 	}
@@ -28,6 +33,10 @@ class List extends Component {
 
 	componentDidMount = () => {
 		this.props.getClients();	
+	}
+
+	search = () => {
+		this.props.search(this.state.key);
 	}
 
 	componentWillReceiveProps = (nextProps) => {
@@ -49,8 +58,8 @@ class List extends Component {
 			}
 			<div>
 				<form className="List" onSubmit={this.onSubmit}>
-					<input value={this.state.name} onChange={this.onNameChange} />
-					<input value={this.state.telephone} onChange={this.onTelephoneChange} />
+					<input value={this.state.name} onChange={this.onNameChange} placeholder="Name" />
+					<input value={this.state.telephone} onChange={this.onTelephoneChange} placeholder="Telephone" />
 					<button>Create</button>			
 				</form>
 			</div>
@@ -79,6 +88,12 @@ class List extends Component {
 					: "No clients to show!"
 				}
 			</div>
+			<div>
+				<form className="List">
+					<input value={this.state.key} onChange={this.onKeyChange} placeholder="Search" />
+				</form>
+					<button onClick={this.search}>Search</button>			
+			</div>
 		</div>
     	);
   }  
@@ -98,6 +113,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		createClient: (name, telephone) => {
 			dispatch(client.create(name, telephone));
+		},
+		search: (key) => {
+			dispatch(client.search(key));
 		}
 	}
 

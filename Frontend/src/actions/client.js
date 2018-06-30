@@ -28,7 +28,6 @@ export const create = (name, telephone) => {
 		return fetch('/clients/create', {headers, method: 'POST', body})
 			.then(res => res.json())
 			.then(client => {
-				console.log(client);
 				if(client.error){
 					return dispatch({
 						type: 'CREATE_FAILED',
@@ -58,7 +57,6 @@ export const update = (id, name, telephone) => {
 		return fetch('/clients/'+id, {headers, method: 'PUT', body})
 			.then(res => res.json())
 			.then(client => {
-				console.log(client);
 				if(client.error){
 					return dispatch({
 						type: 'UPDATE_FAILED',
@@ -84,7 +82,6 @@ export const destroy = (id) => {
 		return fetch('/clients/'+id, {headers, method: 'DELETE'})
 			.then(res => res.json())
 			.then(client => {
-				console.log(client);
 				if(client.error){
 					return dispatch({
 						type: 'DELETE_FAILED',
@@ -102,3 +99,23 @@ export const destroy = (id) => {
 		}
 }
 
+export const search = (key) => {
+	return dispatch => {
+		let headers = {
+			'Content-Type': 'application/json',
+			'Accept' : 'application/json'};
+		let body = JSON.stringify({
+			key: key
+			});
+		return fetch('/clients/search', {headers, method: 'POST', body})
+			.then(res => res.json())
+			.then(clients => {
+				if(clients){
+					return dispatch({
+						type: 'GET_ALL_SUCCESS',
+						clients,
+					})
+				}
+			});
+		}
+	}
