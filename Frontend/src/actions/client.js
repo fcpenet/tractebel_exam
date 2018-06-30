@@ -100,4 +100,5 @@ export const destroy = (id) => {
 				}
 			});
 		}
-	}
+}
+

@@ -29,6 +29,10 @@ class Detail extends Component {
 		this.props.deleteClient(this.state.id);
 	}
 
+	back = () => {
+		this.props.history.goBack();
+	}
+
 	componentDidMount = () => {
 		const {id, name, telephone} = this.props.location.query
 		this.setState({id: id, name: name, telephone: telephone});
@@ -46,9 +50,10 @@ class Detail extends Component {
 				<form className="Detail" onSubmit={this.onSubmit}>
 					<input value={this.state.name} onChange={this.onNameChange} />
 					<input value={this.state.telephone} onChange={this.onTelephoneChange} />
-					<button>Update</button>			
 				</form>
+					<button onClick={this.onSubmit}>Update</button>			
 					<button onClick={this.delete}>Delete</button>
+					<button onClick={this.back}>Go Back</button>
 			</div>
 		</div>
     	);
@@ -68,7 +73,7 @@ const mapDispatchToProps = dispatch => {
 		},
 		deleteClient: (id) => {
 			dispatch(client.destroy(id));
-		}
+		},
 	}
 
 }

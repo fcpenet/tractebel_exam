@@ -31,9 +31,8 @@ class List extends Component {
 	}
 
 	componentWillReceiveProps = (nextProps) => {
-		if(JSON.stringify(this.props.clients) !== JSON.stringify(nextProps.clients)){
-			this.setState({clients: nextProps.clients});
-		}
+		
+		this.setState({clients: nextProps.clients});
 		if(JSON.stringify(this.props.message) !== JSON.stringify(nextProps.message)){
 			this.setState({message: nextProps.message});
 		}
@@ -41,7 +40,6 @@ class List extends Component {
 
 	render(){	
 		const {clients, message} = this.state;
-		console.log(message);
 		return (
 		<div>
 			{message &&
