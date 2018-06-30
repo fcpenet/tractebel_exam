@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/index');
 
-/* GET users listing. */
+/* /clients/all
+ * GET ALL clients */
 router.get('/all', (req, res, next) => {
 	models.Client.findAll({})
 		.then(clients =>{
@@ -15,6 +16,9 @@ router.get('/all', (req, res, next) => {
 		}));
 });
 
+/* GET /clients/:id
+ * GET client with specified id /clients/<id>
+ * */
 router.get('/:id', (req, res, next) => {
 	models.Client.findById(req.params.id)
 		.then(client => res.json(client))
@@ -25,6 +29,11 @@ router.get('/:id', (req, res, next) => {
 		}));
 });
 
+/* POST /clients/create
+ * POST create a new client,
+ * name and telephone should be present in the body.
+ * Throws an error otherwise
+ * */
 router.post('/create', (req, res, next) => {
 	let {name, telephone} = req.body;
 	models.Client.create({name, telephone})
@@ -38,6 +47,10 @@ router.post('/create', (req, res, next) => {
 		}));
 });
 
+/* POST /clients/search
+ * POST searches for clients that contains the search string
+ * key params must be present in the body
+ * */
 router.post('/search', (req, res, next) => {
 	let {key} = req.body;
 	models.Client.search(key)
@@ -49,6 +62,10 @@ router.post('/search', (req, res, next) => {
 		}));
 });
 
+/* PUT /clients/:id
+ * PUT updates client with the given id /client/<id>
+ * name and telephone to update must be in the body.
+ * */
 router.put('/:id', (req, res, next) => {
 	let {name, telephone} = req.body;
 	models.Client.findById(req.params.id)
@@ -72,6 +89,10 @@ router.put('/:id', (req, res, next) => {
 		}));
 });
 
+/* DELETE /clients/:id
+ * DELETE destroys id specified in url /clients/<id>
+ *
+ * */
 router.delete('/:id', (req, res, next) => {
 	models.Client.destroy({
 			where:{
