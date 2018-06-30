@@ -25,6 +25,10 @@ class Detail extends Component {
 		//redirect after
 	}	
 
+	delete = () => {
+		this.props.deleteClient(this.state.id);
+	}
+
 	componentDidMount = () => {
 		const {id, name, telephone} = this.props.location.query
 		this.setState({id: id, name: name, telephone: telephone});
@@ -44,6 +48,7 @@ class Detail extends Component {
 					<input value={this.state.telephone} onChange={this.onTelephoneChange} />
 					<button>Update</button>			
 				</form>
+					<button onClick={this.delete}>Delete</button>
 			</div>
 		</div>
     	);
@@ -62,7 +67,7 @@ const mapDispatchToProps = dispatch => {
 			dispatch(client.update(id, name, telephone));
 		},
 		deleteClient: (id) => {
-			dispatch(client.delete(id));
+			dispatch(client.destroy(id));
 		}
 	}
 

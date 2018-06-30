@@ -75,3 +75,29 @@ export const update = (id, name, telephone) => {
 			});
 		}
 	}
+
+export const destroy = (id) => {
+	return dispatch => {
+		let headers = {
+			'Content-Type': 'application/json',
+			'Accept' : 'application/json'};
+		return fetch('/clients/'+id, {headers, method: 'DELETE'})
+			.then(res => res.json())
+			.then(client => {
+				console.log(client);
+				if(client.error){
+					return dispatch({
+						type: 'DELETE_FAILED',
+						message: client.message
+					})
+				}
+				else{
+					return dispatch({
+						type: 'DELETE_SUCCESS',
+						message: client.message
+					})
+
+				}
+			});
+		}
+	}

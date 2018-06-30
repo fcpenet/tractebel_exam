@@ -15,11 +15,12 @@ export default function student(state=initialState, action){
 			_state.message = action.message;
 			return _state;
 
-
+		case 'DELETE_SUCCESS':
 		case 'UPDATE_SUCCESS':
 			_state.isDone = true;
 			return _state;
 
+		case 'DELETE_FAILED':
 		case 'UPDATE_FAILED':
 			_state.isDone = false;
 			return _state;
