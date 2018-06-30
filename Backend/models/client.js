@@ -1,4 +1,7 @@
 'use strict';
+
+const Op = require('Sequelize').Op;
+
 module.exports = (sequelize, DataTypes) => {
   var Client = sequelize.define('Client', {
     name: {
@@ -18,12 +21,22 @@ module.exports = (sequelize, DataTypes) => {
 			is: {
 				args: /^\+*[\s-+().0-9x]+$/i,
 				msg: "Invalid telephone format"
+				}
 			}
-		}
-	},
-  }, {});
-  Client.associate = function(models) {
-    // associations can be defined here
-  };
+		},
+  	}, {});
+  	Client.associate = function(models) {
+    	// associations can be defined here
+	};
+
+  	Client.search = function(key){
+		return Client.findAll({
+			where:{
+				name: {
+					[Op.like]: '%' + key + '%'
+				}
+			}
+		});
+	}
   return Client;
 };
