@@ -34,8 +34,13 @@ class Detail extends Component {
 	}
 
 	componentDidMount = () => {
-		const {id, name, telephone} = this.props.location.query
-		this.setState({id: id, name: name, telephone: telephone});
+		if(this.props.location.query){
+			const {id, name, telephone} = this.props.location.query
+			this.setState({id: id, name: name, telephone: telephone});
+		}
+		else{
+			this.props.history.push('/');
+		}
 	}
 
 	render(){	
