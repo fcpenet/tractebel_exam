@@ -55,8 +55,7 @@ describe('Client Routes', function(){
 			.end((err, res) => {
 				res.should.have.status(200);
 				res.body.should.be.a('object');
-				res.body.should.have.property('errors');
-				res.body.errors.should.have.property('name');
+				res.body.should.have.property('message');
 				done();
 			});
       	});

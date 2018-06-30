@@ -5,8 +5,9 @@ var models = require('../models/index');
 /* GET users listing. */
 router.get('/all', (req, res, next) => {
 	models.Client.findAll({})
-		.then(clients =>
-			res.json(clients))
+		.then(clients =>{
+			res.json(clients)
+		})
 		.catch(err => res.json({
 			error: true,
 			data: [],
@@ -33,7 +34,7 @@ router.post('/create', (req, res, next) => {
 		.catch(err => res.json({
 			error: true,
 			data: {},
-			errors: err
+			message: err.errors[0].message,
 		}));
 });
 
